@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { AtualizarAutorDto, CriarAutorDto } from './autores.dto';
+import { AutoresRepository } from './autores.repository';
 
 let autores = [
   {
@@ -24,11 +25,10 @@ let autores = [
 ];
 @Injectable()
 export class AutoresService {
-  listarAutores() {
-    if (!autores) {
-      return 'nao ha autores';
-    }
-    return autores;
+  constructor(private readonly autoresRepository: AutoresRepository) {}
+
+  async listarAutores() {
+    return await this.autoresRepository.listarAutores();
   }
 
   listarAutor(id: number) {

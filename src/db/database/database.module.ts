@@ -15,6 +15,7 @@ import * as schema from '../schemas/index';
           server: 'SRV-BD-1',
           port: 1433,
           password: '123',
+          user: 'alunos_des225',
           database: 'des225_jean',
           options: {
             encrypt: false,

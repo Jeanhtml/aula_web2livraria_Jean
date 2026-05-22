@@ -36,7 +36,7 @@ export class AtualizarAutorDto {
       return value.trim();
     }
   })
-  nome: string;
+  titulo: string;
 
   @IsEmail({}, { message: 'O email deve ser um email válido' })
   @MaxLength(255, { message: 'O email deve ter no máximo 255 caracteres' })

@@ -1,25 +1,21 @@
 import {
-  mssqlTable,
   int,
+  mssqlTable,
   varchar,
+  text,
   datetime,
-  bit,
-  decimal,
 } from 'drizzle-orm/mssql-core';
-export const livrosTabela = mssqlTable('livros', {
-  id: int().primaryKey().identity(),
-  titulo: varchar({ length: 100 }).notNull(),
-  autorId: int().notNull(),
-  editoraId: int().notNull(),
-  anoPublicacao: int().notNull(),
-  quantidade: int().notNull(),
-  preco: decimal({ precision: 10, scale: 2 }).notNull(),
-  criadoEm: datetime().notNull().defaultGetDate(),
-  atualizadoEm: datetime().notNull().defaultGetDate(),
-});
-function mssqlDecimal(arg0: { precision: number; scale: number }) {
-  throw new Error('Function not implemented.');
-}
+import { autoresTabela } from './autores';
 
-export type Livros = typeof livrosTabela.$inferSelect;
-export type CriarLivroDto = typeof livrosTabela.$inferInsert;
+export const livrosTabela = mssqlTable('livros', {
+  id: int('id').primaryKey().identity(),
+  idAutor: int('id_autor')
+    .notNull()
+    .references(() => autoresTabela.id),
+  titulo: varchar('titulo', { length: 100 }).notNull(),
+  descricrao: text('descricrao').notNull(),
+  criadoEm: datetime('criado_em').notNull().defaultGetDate(),
+});
+
+export type Livro = typeof livrosTabela.$inferSelect;
+export type CriarLivro = typeof livrosTabela.$inferInsert;

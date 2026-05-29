@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { LivrosRepository } from './livros.repository';
 import { CriarLivroDto } from './livros.dto';
 import { AutoresService } from '../autores/autores.service';
@@ -17,5 +17,16 @@ export class LivrosService {
   async criarLivro(bodyRequest: CriarLivroDto) {
     return await this.livrosRepository.criarLivro(bodyRequest);
   }
+
+  async listarLivro(id: number) {
+    const livroEncontrado = await this.livrosRepository.listarlivro(id);
+
+    if (!livroEncontrado) {
+      throw new NotFoundException('Livro de id ${id} não encontrado');
+    }
+
+    return livroEncontrado;
+  }
 }
+
 ('');

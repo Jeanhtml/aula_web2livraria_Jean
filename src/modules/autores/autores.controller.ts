@@ -30,7 +30,7 @@ export class AutoresController {
   }
 
   @Put('atualizar-autor/:id')
-  atualizarautor(
+  async atualizarautor(
     @Param('id', ParseIntPipe) idAutor: number,
     @Body() bodyRequest: AtualizarAutorDto,
   ) {
@@ -38,7 +38,12 @@ export class AutoresController {
   }
 
   @Delete('/deletar-autor/:id')
-  deletarAutor(@Param('id', ParseIntPipe) idAutor: number) {
+  async deletarAutor(@Param('id', ParseIntPipe) idAutor: number) {
     return this.autoresService.deletarAutor(idAutor);
   }
+}
+  
+@Put(i/inativar-autor/:id)
+async inativarAutor(@Param('id', ParseIntPipe) idAutor: number) {
+  return await this.autoresService.inativarAutor(idAutor);
 }

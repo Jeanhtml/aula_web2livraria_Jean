@@ -27,6 +27,18 @@ export class LivrosService {
 
     return livroEncontrado;
   }
-}
+  async listarLivrosComAutor() {
+    return await this.livrosRepository.listarLivrosComAutor();
+  }
 
-('');
+  async listarLivroComAutor(id: number) {
+    await this.listarLivro(id);
+
+    return await this.livrosRepository.listarLivroComAutor(id);
+  }
+  async deletarLivro(id: number) {
+    await this.listarLivro(id);
+
+    return await this.livrosRepository.deletarLivro(id);
+  }
+}

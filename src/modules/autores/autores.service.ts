@@ -36,6 +36,8 @@ export class AutoresService {
 
     if (!autorEncontrado) {
       throw new NotFoundException(`Autor com id ${id} não encontrado`);
+    } else if (autorEncontrado.ativo === false)
+      throw new NotFoundException('Autor com id $(id) está inativo');
     }
 
     return autorEncontrado;
@@ -55,4 +57,10 @@ export class AutoresService {
 
     return await this.autoresRepository.deletarAutor(idAutor);
   }
+}
+
+  async inativarAutor(idAutor: number) {
+  await this.listarAutor(idAutor);
+
+  return this.autoresRepository.inativarAutor(idAutor);
 }
